@@ -6,10 +6,111 @@ Hadoop Streaming is a utility that allows you to use **any programming language*
 
 With Hadoop Streaming, you can write your MapReduce tasks in languages like **Python**, Ruby, Perl, or even shell scripts
 
+### Installation
+
+```
+brew install hadoop
+```
+
+core-site.xml
+
+```
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+  </property>
+</configuration>
+```
+
+hadoop-env.sh
+
+```
+export JAVA_HOME=/Users/neteasegames/Library/Java/JavaVirtualMachines/corretto-11.0.21/Contents/Home
+export HADOOP_HOME=/opt/homebrew/Cellar/hadoop/3.4.0/libexec
+```
+
+hdfs-site.xml
+
+```
+<configuration>
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+</configuration>
+```
+
+mapred-site.xml
+
+```
+<configuration>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+  <property>
+    <name>yarn.app.mapreduce.am.env</name>
+    <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
+  </property>
+  <property>
+    <name>mapreduce.map.env</name>
+    <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.env</name>
+    <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
+  </property>
+</configuration>
+```
+
+yarn-site.xml
+
+```
+<configuration>
+  <property>
+    <name>yarn.log-aggregation-enable</name>
+    <value>True</value>
+    <final>false</final>
+  </property>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>
+    <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+  </property>
+</configuration>
+```
+
 ### Start cluster
 
 ```
 start-dfs.sh && start-yarn.sh && mapred --daemon start historyserver
+```
+
+### Web UI
+
+HDFS node manager
+http://localhost:9870/dfshealth.html#tab-overview
+YARN resource manager (yarn mode)
+http://localhost:8088/cluster
+Job history (yarn mode)
+http://localhost:19888/jobhistory
+
+### Run Hadoop Streaming job
+
+```
+hadoop jar /opt/homebrew/Cellar/hadoop/3.4.0/libexec/share/hadoop/tools/lib/hadoop-streaming-3.4.0.jar \
+-input path/to/input/file \
+-output path/to/output/folder \
+-file path/to/'mapper.py' \
+-file path/to/'reducer.py' \
+-file path/to/'combiner.py' \
+-mapper 'path/to/python mapper.py' \
+-reducer 'path/to/python reducer.py' \
+-combiner 'path/to/python combiner.py'
 ```
 
 ### Close cluster
