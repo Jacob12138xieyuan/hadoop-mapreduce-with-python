@@ -1,0 +1,9 @@
+0 hellohello
+0 hadoop
+0 hadoop
+1 hello
+1 hadoop
+0 hell
+0 hadoop
+0 hello
+1 hadoop
