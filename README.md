@@ -92,12 +92,12 @@ start-dfs.sh && start-yarn.sh && mapred --daemon start historyserver
 
 ### Web UI
 
-HDFS node manager
-http://localhost:9870/dfshealth.html#tab-overview
-YARN resource manager (yarn mode)
-http://localhost:8088/cluster
-Job history (yarn mode)
-http://localhost:19888/jobhistory
+- HDFS node manager
+  http://localhost:9870/dfshealth.html#tab-overview
+- YARN resource manager (yarn mode)
+  http://localhost:8088/cluster
+- Job history (yarn mode)
+  http://localhost:19888/jobhistory
 
 ### Run Hadoop Streaming job
 
@@ -133,7 +133,7 @@ hadoop spark
 hello spark spark
 ```
 
-Write MapReduce algo to count the words in file. Output pair as <word, count>
+Write MapReduce algo to count the each word in file. Output pair as <word, count>
 
 ### mapper
 
@@ -260,7 +260,7 @@ yanlin 91
 tommy 77
 ```
 
-Write MapReduce algo to calculate the average score of each student. Output avg score as <name, score>
+Write MapReduce algo to calculate the average score of each student. Output avg score as <name, avg_score>
 
 ### mapper
 
