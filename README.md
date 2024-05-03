@@ -4,7 +4,7 @@
 
 Hadoop Streaming is a utility that allows you to use **any programming language** to write **MapReduce** jobs for Hadoop. It provides a way to process data in Hadoop using **standard input and output streams**, making it flexible and language-agnostic.
 
-With Hadoop Streaming, you can write your MapReduce tasks in languages like **Python**, Ruby, Perl, or even shell scripts
+With Hadoop Streaming, you can write your MapReduce tasks in languages like **Python**, Ruby, Perl, or even shell scripts.
 
 ### Installation
 
